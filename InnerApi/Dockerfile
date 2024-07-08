@@ -21,4 +21,8 @@ RUN dotnet publish "InnerApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+USER root
+COPY kubectl /usr/local/bin/kubectl
+RUN chmod +x /usr/local/bin/kubectl
+USER $APP_UID
 ENTRYPOINT ["dotnet", "InnerApi.dll"]

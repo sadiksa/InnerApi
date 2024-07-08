@@ -12,7 +12,7 @@ public class K8SClientService(IWebHostEnvironment env) : IK8SClientService
             return new Kubernetes(configForInCluster);
         }
         var configForConfigFile = KubernetesClientConfiguration.BuildConfigFromConfigFile("./config");
-        configForConfigFile.Host = "https://16.171.20.108:6443";
+        configForConfigFile.Host = "https://16.171.30.25:6443";
         // master node ip. it changing cause of aws has not elastic ip
         return new Kubernetes(configForConfigFile);
     }
