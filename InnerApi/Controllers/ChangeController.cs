@@ -1,3 +1,4 @@
+using InnerApi.Models.Requests;
 using InnerApi.Services;
 using k8s;
 using k8s.Models;
@@ -14,7 +15,7 @@ public class ChangeController(IK8SClientService k8SClientService)
 {
     // Scale pods to target number
     [HttpPost("scale")]
-    public async Task<string> ScalePods(string namespaceName, string deploymentName, int target)
+    public async Task<string> ScalePods(ScalePodsRequest scalePodsRequest)
     {
         try
         {
@@ -23,16 +24,19 @@ public class ChangeController(IK8SClientService k8SClientService)
             Console.WriteLine("Starting Request!");
 
             // Fetch the deployment
-            var deployment = await client.AppsV1.ReadNamespacedDeploymentAsync(deploymentName, namespaceName);
+            var deployment =
+                await client.AppsV1.ReadNamespacedDeploymentAsync(scalePodsRequest.DeploymentName,
+                    scalePodsRequest.NamespaceName);
 
             // Update the number of replicas
-            deployment.Spec.Replicas = target;
+            deployment.Spec.Replicas = scalePodsRequest.Target;
 
             // Apply the changes
             var updatedDeployment =
-                await client.AppsV1.ReplaceNamespacedDeploymentAsync(deployment, deploymentName, namespaceName);
+                await client.AppsV1.ReplaceNamespacedDeploymentAsync(deployment, scalePodsRequest.DeploymentName,
+                    scalePodsRequest.NamespaceName);
 
-            return $"Scaled deployment {deploymentName} to {target} replicas.";
+            return $"Scaled deployment {scalePodsRequest.DeploymentName} to {scalePodsRequest.Target} replicas.";
         }
         catch (Exception ex)
         {
@@ -42,22 +46,22 @@ public class ChangeController(IK8SClientService k8SClientService)
 
     // restart pod
     [HttpPost("restart")]
-    public async Task<string> RestartPod(string namespaceName, string deploymentName)
+    public async Task<string> RestartPod(RestartPodRequest restartPodRequest)
     {
         try
         {
             var client = k8SClientService.GetClient();
             Console.WriteLine("Starting Request!");
 
-            var pods = await client.CoreV1.ListNamespacedPodAsync(namespaceName);
-            var deploymentPods = pods.Items.Where(p => p.Metadata.Labels["app"] == deploymentName);
+            var pods = await client.CoreV1.ListNamespacedPodAsync(restartPodRequest.NamespaceName);
+            var deploymentPods = pods.Items.Where(p => p.Metadata.Labels["app"] == restartPodRequest.DeploymentName);
 
             foreach (var pod in deploymentPods)
             {
-                await client.CoreV1.DeleteNamespacedPodAsync(pod.Metadata.Name, namespaceName);
+                await client.CoreV1.DeleteNamespacedPodAsync(pod.Metadata.Name, restartPodRequest.NamespaceName);
             }
 
-            return $"Restarted deployment {deploymentName}.";
+            return $"Restarted deployment {restartPodRequest.DeploymentName}.";
         }
         catch (Exception ex)
         {
@@ -67,7 +71,7 @@ public class ChangeController(IK8SClientService k8SClientService)
 
     // add ingress. Path, service, port, namespace
     [HttpPost("ingress")]
-    public async Task<string> AddIngress(string path, string serviceName, int servicePort, string namespaceName)
+    public async Task<string> AddIngress(AddIngressRequest addIngressRequest)
     {
         try
         {
@@ -80,13 +84,13 @@ public class ChangeController(IK8SClientService k8SClientService)
                 Kind = "Ingress",
                 Metadata = new V1ObjectMeta
                 {
-                    Name = $"{serviceName}-ingress",
-                    NamespaceProperty = namespaceName,
+                    Name = $"{addIngressRequest.ServiceName}-ingress",
+                    NamespaceProperty = addIngressRequest.NamespaceName,
                     Annotations = new Dictionary<string, string>
                     {
                         //kubernetes.io/ingress.class: nginx 
-                        {"kubernetes.io/ingress.class", "nginx"},
-                        {"nginx.ingress.kubernetes.io/rewrite-target", "/"}
+                        { "kubernetes.io/ingress.class", "nginx" },
+                        { "nginx.ingress.kubernetes.io/rewrite-target", "/" }
                     }
                 },
                 Spec = new V1IngressSpec
@@ -101,16 +105,16 @@ public class ChangeController(IK8SClientService k8SClientService)
                                 {
                                     new V1HTTPIngressPath
                                     {
-                                        Path = path,
+                                        Path = addIngressRequest.Path,
                                         PathType = "Prefix",
                                         Backend = new V1IngressBackend
                                         {
                                             Service = new V1IngressServiceBackend
                                             {
-                                                Name = serviceName,
+                                                Name = addIngressRequest.ServiceName,
                                                 Port = new V1ServiceBackendPort
                                                 {
-                                                    Number = servicePort
+                                                    Number = addIngressRequest.ServicePort
                                                 }
                                             }
                                         }
@@ -121,8 +125,9 @@ public class ChangeController(IK8SClientService k8SClientService)
                     }
                 }
             };
-            var createdIngress = await client.NetworkingV1.CreateNamespacedIngressAsync(ingress, namespaceName);
-            
+            var createdIngress =
+                await client.NetworkingV1.CreateNamespacedIngressAsync(ingress, addIngressRequest.NamespaceName);
+
             return $"Created Ingress {createdIngress.Metadata.Name}.";
         }
         catch (Exception ex)
