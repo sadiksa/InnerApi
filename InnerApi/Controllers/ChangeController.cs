@@ -11,11 +11,11 @@ namespace InnerApi.Controllers;
 [ApiController]
 [Authorize]
 [Route("[controller]")]
-public class ChangeController(IK8SClientService k8SClientService)
+public class ChangeController(IK8SClientService k8SClientService) : ControllerBase
 {
     // Scale pods to target number
     [HttpPost("scale")]
-    public async Task<string> ScalePods(ScalePodsRequest scalePodsRequest)
+    public async Task<IActionResult> ScalePods(ScalePodsRequest scalePodsRequest)
     {
         try
         {
@@ -36,17 +36,17 @@ public class ChangeController(IK8SClientService k8SClientService)
                 await client.AppsV1.ReplaceNamespacedDeploymentAsync(deployment, scalePodsRequest.DeploymentName,
                     scalePodsRequest.NamespaceName);
 
-            return $"Scaled deployment {scalePodsRequest.DeploymentName} to {scalePodsRequest.Target} replicas.";
+            return Ok($"Scaled deployment {scalePodsRequest.DeploymentName} to {scalePodsRequest.Target} replicas.");
         }
         catch (Exception ex)
         {
-            return $"Error scaling deployment: {ex.Message}";
+            return BadRequest($"Error scaling deployment: {ex.Message}");
         }
     }
 
     // restart pod
     [HttpPost("restart")]
-    public async Task<string> RestartPod(RestartPodRequest restartPodRequest)
+    public async Task<IActionResult> RestartPod(RestartPodRequest restartPodRequest)
     {
         try
         {
@@ -61,17 +61,17 @@ public class ChangeController(IK8SClientService k8SClientService)
                 await client.CoreV1.DeleteNamespacedPodAsync(pod.Metadata.Name, restartPodRequest.NamespaceName);
             }
 
-            return $"Restarted deployment {restartPodRequest.DeploymentName}.";
+            return Ok($"Restarted deployment {restartPodRequest.DeploymentName}.");
         }
         catch (Exception ex)
         {
-            return $"Error restarting deployment: {ex.Message}";
+            return BadRequest($"Error restarting deployment: {ex.Message}");
         }
     }
 
     // add ingress. Path, service, port, namespace
     [HttpPost("ingress")]
-    public async Task<string> AddIngress(AddIngressRequest addIngressRequest)
+    public async Task<IActionResult> AddIngress(AddIngressRequest addIngressRequest)
     {
         try
         {
@@ -84,7 +84,7 @@ public class ChangeController(IK8SClientService k8SClientService)
                 Kind = "Ingress",
                 Metadata = new V1ObjectMeta
                 {
-                    Name = $"{addIngressRequest.ServiceName}-ingress",
+                    Name = $"{addIngressRequest.ServiceName}-ingress-{addIngressRequest.ServicePort}",
                     NamespaceProperty = addIngressRequest.NamespaceName,
                     Annotations = new Dictionary<string, string>
                     {
@@ -128,12 +128,12 @@ public class ChangeController(IK8SClientService k8SClientService)
             var createdIngress =
                 await client.NetworkingV1.CreateNamespacedIngressAsync(ingress, addIngressRequest.NamespaceName);
 
-            return $"Created Ingress {createdIngress.Metadata.Name}.";
+            return Ok($"Created Ingress {createdIngress.Metadata.Name}.");
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error creating Ingress: {ex.Message}");
-            return $"Error creating Ingress: {ex.Message}";
+            return BadRequest($"Error creating Ingress: {ex.Message}");
         }
     }
 }
