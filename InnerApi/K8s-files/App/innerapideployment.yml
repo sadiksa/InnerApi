@@ -20,5 +20,5 @@ spec:
       - name: innerapi-container
         image: sadiksa/innerapi:$(Build.BuildNumber)
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 
