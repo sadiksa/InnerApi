@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: innerapi-ingress
+  namespace: innerapi
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /innerapi(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: innerapi-service
+                port:
+                  number: 8080
+
