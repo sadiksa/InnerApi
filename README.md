@@ -19,6 +19,9 @@ Uygulamanin ve pipelinelarin calisan imagelari icin [/working_app_images](https:
 4. Serviceleri yonetme (namespace bazinda)
     - istenilen path ve port icin yeni **ingress** ekleyebilme
 
+## Birlestirilmis gorsel
+![InnerApi](https://i.ibb.co/y8ZDrqh/project-general.png)
+
 ### Icerik
 - Pipeline
 - Docker
