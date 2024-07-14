@@ -1,7 +1,8 @@
 # InnerApi App
 Kubectl ile Kubernetes kaynaklarina erisim ve degisim uygulamasidir. Cluster icinde konumlanir. \
 Erisim icin [**RBAC**](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) kullanir. (localde KUBECONFIG ile calisir.) \
-[https://bootcamp.sadiksa.xyz/innerapi](https://bootcamp.sadiksa.xyz/innerapi) (Prod ortamda swagger kapalidir.)
+[https://bootcamp.sadiksa.xyz/innerapi](https://bootcamp.sadiksa.xyz/innerapi) (Prod ortamda swagger kapalidir.)\
+AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.
 
 ### Pipeline
 Azure Devops Build Pipeline ve Release Pipeline kullanilmistir. \
