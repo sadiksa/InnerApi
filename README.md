@@ -4,6 +4,9 @@ Erisim icin [**RBAC**](https://kubernetes.io/docs/reference/access-authn-authz/r
 [https://bootcamp.sadiksa.xyz/innerapi](https://bootcamp.sadiksa.xyz/innerapi) (Prod ortamda swagger kapalidir.)\
 AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.
 
+### <a name="head1234"></a>A Heading in this SO entry!
+#### Best answer is in this [link](#head1234)
+
 ### Icerik
 - Pipeline
 - Docker
@@ -12,7 +15,7 @@ AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.
 - Cloud Bilgileri
 - Kullanilan Kutuphaneler
 - Authentication
-- InnerApiClient(UI)
+- [InnerApiClient(UI)](#innerapiclientui)
 
 ### Pipeline
 Azure Devops Build Pipeline ve Release Pipeline kullanilmistir. \
@@ -39,5 +42,6 @@ User => **temp_user** \
 Password => **temp_password**
 
 ### InnerApiClient(UI)
+<a name ="innerapiclientui"></a>
 Client uygulamasi icin ilgili repoya gidebilirsiniz. [Client](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApiClient)
 
