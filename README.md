@@ -2,7 +2,19 @@
 Kubectl ile Kubernetes kaynaklarina erisim ve degisim uygulamasidir. Cluster icinde konumlanir. \
 Erisim icin [**RBAC**](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) kullanir. (localde KUBECONFIG ile calisir.) \
 [https://bootcamp.sadiksa.xyz/innerapi](https://bootcamp.sadiksa.xyz/innerapi) (Prod ortamda swagger kapalidir.)\
-AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.
+AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.\
+
+## Uygulamanin Yetenekleri
+1. Node **Metric**lerini izleme
+    - CPU
+    - Memory
+2. Deploymentlari yonetme
+    - Deploy **restart** edebilme
+    - Istenilen sayiya **Scale** edebilme
+3. Podlari yonetme ve izleme
+    - **Log**lari gosterebilme
+4. Serviceleri yonetme
+    - istenilen path ve port icin yeni **ingress** ekleyebilme
 
 ### Icerik
 - Pipeline
