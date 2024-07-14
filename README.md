@@ -3,6 +3,9 @@ Kubectl ile Kubernetes kaynaklarina erisim ve degisim uygulamasidir. Cluster ici
 Erisim icin [**RBAC**](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) kullanir. (localde KUBECONFIG ile calisir.) \
 [https://bootcamp.sadiksa.xyz/innerapi](https://bootcamp.sadiksa.xyz/innerapi) (Prod ortamda swagger kapalidir.)\
 AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.\
+\
+Uygulamanin ve pipelinelarin calisan imagelari icin [/working_app_images](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/working_app_images&version=GBmain) klasorune gidebilirsiniz.
+
 
 ## Uygulamanin Yetenekleri
 1. Node **Metric**lerini izleme
