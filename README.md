@@ -1,20 +1,27 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# InnerApi App
+Kubectl ile Kubernetes kaynaklarina erisim ve degisim uygulamasidir. Cluster icinde konumlanir. \
+Erisim icin [**RBAC**](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) kullanir. (localde KUBECONFIG ile calisir.) \
+[https://bootcamp.sadiksa.xyz/innerapi](https://bootcamp.sadiksa.xyz/innerapi) (Prod ortamda swagger kapalidir.)
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+### Pipeline
+Azure Devops Build Pipeline ve Release Pipeline kullanilmistir. \
+[Build Pipeline yml](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/azure-pipelines.yml&version=GBmain)
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+### Authentication
+[Basic](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/InnerApi/BasicAuthenticationHandler.cs&version=GBmain) ile korunmaktadir. \
+\
+User => **temp_user** \
+Password => **temp_password**
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+### InnerApiClient(UI)
+Client uygulamasi icin ilgili repoya gidebilirsiniz. [Client](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApiClient)
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### Docker
+Client uygulamasi pod icinde kubectl kullandigi icin kubectl [Docker](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/InnerApi/Dockerfile&version=GBmain) ile container olusurken /usr/local/bin altina kopyalandi.
+
+### Cloud Bilgileri
+AWS sistemlerinde 1 master 2 worker calisan K8s sisteminde calisiyor, \
+Ssl sertifikasi icin AWS EC2 LB olusturuldu. Cluster ingress NodePort svc ile tek noktadan cikis verildi.
+
+### Kullanilan Kutuphaneler
+K8s tarafindan desteklenen resmi [client kutuphanesi](https://github.com/kubernetes-client/csharp) kullanildi. 
