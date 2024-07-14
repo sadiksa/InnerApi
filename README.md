@@ -4,9 +4,33 @@ Erisim icin [**RBAC**](https://kubernetes.io/docs/reference/access-authn-authz/r
 [https://bootcamp.sadiksa.xyz/innerapi](https://bootcamp.sadiksa.xyz/innerapi) (Prod ortamda swagger kapalidir.)\
 AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.
 
+### Icerik
+- Pipeline
+- Docker
+- Docker
+- Kubernetes Dosyaları
+- Cloud Bilgileri
+- Kullanilan Kutuphaneler
+- Authentication
+- InnerApiClient(UI)
+
 ### Pipeline
 Azure Devops Build Pipeline ve Release Pipeline kullanilmistir. \
 [Build Pipeline yml](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/azure-pipelines.yml&version=GBmain)
+
+### Docker
+Client uygulamasi pod icinde kubectl kullandigi icin kubectl [Docker](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/InnerApi/Dockerfile&version=GBmain) ile container olusurken /usr/local/bin altina kopyalandi.
+
+### Kubernetes Dosyaları
+Kubernetes deployment, service ve ingress dosyaları [K8s-files/App](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/InnerApi/K8s-files/App&version=GBmain) altındadır. \
+Kubernetes RBAC role, serviceAccount, rolebinding dosyalari [K8s-files/Roles](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/InnerApi/K8s-files/Roles&version=GBmain) altindadir.
+
+### Cloud Bilgileri
+AWS sistemlerinde 1 master 2 worker calisan K8s sisteminde calisiyor, \
+Ssl sertifikasi icin AWS EC2 LB olusturuldu. Cluster ingress NodePort svc ile tek noktadan cikis verildi.
+
+### Kullanilan Kutuphaneler
+K8s tarafindan desteklenen resmi [client kutuphanesi](https://github.com/kubernetes-client/csharp) kullanildi. 
 
 ### Authentication
 [Basic](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/InnerApi/BasicAuthenticationHandler.cs&version=GBmain) ile korunmaktadir. \
@@ -17,12 +41,3 @@ Password => **temp_password**
 ### InnerApiClient(UI)
 Client uygulamasi icin ilgili repoya gidebilirsiniz. [Client](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApiClient)
 
-### Docker
-Client uygulamasi pod icinde kubectl kullandigi icin kubectl [Docker](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApi?path=/InnerApi/Dockerfile&version=GBmain) ile container olusurken /usr/local/bin altina kopyalandi.
-
-### Cloud Bilgileri
-AWS sistemlerinde 1 master 2 worker calisan K8s sisteminde calisiyor, \
-Ssl sertifikasi icin AWS EC2 LB olusturuldu. Cluster ingress NodePort svc ile tek noktadan cikis verildi.
-
-### Kullanilan Kutuphaneler
-K8s tarafindan desteklenen resmi [client kutuphanesi](https://github.com/kubernetes-client/csharp) kullanildi. 
