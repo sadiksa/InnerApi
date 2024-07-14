@@ -15,7 +15,7 @@ AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.
 - Cloud Bilgileri
 - Kullanilan Kutuphaneler
 - Authentication
-- [InnerApiClient(UI)](#innerapiclientui)
+- InnerApiClient(UI)
 
 ### Pipeline
 Azure Devops Build Pipeline ve Release Pipeline kullanilmistir. \
@@ -42,6 +42,5 @@ User => **temp_user** \
 Password => **temp_password**
 
 ### InnerApiClient(UI)
-<a name ="innerapiclientui"></a>
 Client uygulamasi icin ilgili repoya gidebilirsiniz. [Client](https://dev.azure.com/sadiksahin0511/bootcamp/_git/InnerApiClient)
 
