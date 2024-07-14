@@ -8,12 +8,12 @@ AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.\
 1. Node **Metric**lerini izleme
     - CPU
     - Memory
-2. Deploymentlari yonetme
+2. Deploymentlari yonetme (namespace bazinda)
     - Deploy **restart** edebilme
     - Istenilen sayiya **Scale** edebilme
-3. Podlari yonetme ve izleme
+3. Podlari yonetme ve izleme (namespace bazinda)
     - **Log**lari gosterebilme
-4. Serviceleri yonetme
+4. Serviceleri yonetme (namespace bazinda)
     - istenilen path ve port icin yeni **ingress** ekleyebilme
 
 ### Icerik
