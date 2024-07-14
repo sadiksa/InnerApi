@@ -4,9 +4,6 @@ Erisim icin [**RBAC**](https://kubernetes.io/docs/reference/access-authn-authz/r
 [https://bootcamp.sadiksa.xyz/innerapi](https://bootcamp.sadiksa.xyz/innerapi) (Prod ortamda swagger kapalidir.)\
 AWS faturasi yukselmesin diye kapalidir. Haber vermeniz halinde acabilirim.
 
-### <a name="head1234"></a>A Heading in this SO entry!
-#### Best answer is in this [link](#head1234)
-
 ### Icerik
 - Pipeline
 - Docker
